@@ -1,0 +1,22 @@
+pandas
+torch   # 1.12.1
+transformers
+InstructorEmbedding
+langchain
+langchain-chroma
+langchain-core
+langchain-community
+langchain-experimental
+chromadb
+accelerate
+bitsandbytes
+openpyxl
+flashrank
+matplotlib
+gradio
+python-docx
+PyPDF2
+neo4j
+python-dotenv
+json-repair
+tqdm
