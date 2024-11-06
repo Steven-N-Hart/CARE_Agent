@@ -109,5 +109,6 @@ There are two main outputs to the CARE automation pipeline:
   * `agent_plot`: Donut plot of completion by agent 
   ![img](resources/agent_plot.png)
 
+> Example outputs can be found in the [resources](resources) directory
 
 
