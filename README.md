@@ -32,10 +32,18 @@ are developed responsibly, integrated smoothly into clinical practice, and conti
 and ethical compliance. This comprehensive approach promotes the successful adoption of AI in healthcare, enhancing 
 patient outcomes and system efficiency.
 
+# Installation
+```shell
+conda env create -f environment.yml 
+conda activate CARE
+```
+> Note: If you are running your LLM Locally, this has been tested with [Ollama](https://ollama.com/download). 
+Make sure you are serving your model before execution (`ollama serve`)!
+
 # How to use this tool
 To use this program, several command line parameters are available:
 ```shell
-usage: main.py [-h] [-p PROPOSAL_FILE_OR_DIR] [-c CARE_FILE] [-d DBFILEPATH] [-o OUT_FILE]
+usage: main.py [-h] [-p PROPOSAL_FILE_OR_DIR] [-c CARE_FILE] [-d DBFILEPATH] [-o OUT_FILE] [-u URL]
                [-v {DEBUG,INFO,WARNING,CRITICAL}]
 
 CARE AI Lifecycle Assessor
@@ -50,6 +58,8 @@ options:
                         Where to save chromaDB
   -o OUT_FILE, --out_file OUT_FILE
                         Prefix for reports
+  -u URL, --base_url http://localhost:11434
+                        URL of your running LLM
   -v {DEBUG,INFO,WARNING,CRITICAL}, --verbosity {DEBUG,INFO,WARNING,CRITICAL}
 ```
 

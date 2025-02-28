@@ -23,6 +23,9 @@ def get_args() -> argparse.Namespace:
     parser.add_argument('-o', '--out_file', default='report', help="Prefix for reports")
     parser.add_argument('-C', '--chunker', default='character', choices=['semantic', 'recursive', 'character'],
                         help="Chunking style")
+    parser.add_argument('-u', '--base_url', default='http://localhost:11434',
+                        help="URL of your LLM")
+
     parser.add_argument('-V', '--vector_store', action='store_true', help="Whether to build a vectordb", default=True)
     parser.add_argument('-m', '--model_name', default='llama3:70b', help="LLM Model to use")
     parser.add_argument('-n', '--n_results', default=5, help="Number of results to pull from vector store")
@@ -52,6 +55,7 @@ if __name__ == '__main__':
     model = OllamaLLM(model_name=args.model_name, proposal_document=proposal, chromadb_path=args.dbfilepath,
                       chunker=args.chunker, n_results=args.n_results,
                       build_vectorstore = args.vector_store,
+                      base_url = args.base_url,
                       chunk_size=args.chunk_size, chunk_overlap=args.chunk_overlap)
 
 
