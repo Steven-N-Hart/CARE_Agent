@@ -1,10 +1,14 @@
+import os.path
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_pdf import PdfPages
+import os
 
 def print_results(report_name=None, model_name=None):
-    results_table = pd.read_excel(report_name + '.' + model_name.replace(':','-') + '.xlsx')
+    fname = f"{report_name}.{model_name.replace(':','-')}.xlsx"
+    results_table = pd.read_excel(fname)
 
     # Generate trl_completeness plot and table
     plt1, trl_table = trl_completeness(results_table)
@@ -36,6 +40,9 @@ def print_results(report_name=None, model_name=None):
         pdf.savefig(fig)
         plt.close()
         """
+    plt1.savefig(report_name + '.' + model_name.replace(':', '-') + '_trl.svg', format='svg')
+    plt2.savefig(report_name + '.' + model_name.replace(':', '-') + '_persona.svg', format='svg')
+
     print("PDF report generated successfully.")
 
 def trl_completeness(results_table=None):
@@ -110,16 +117,16 @@ def persona_completeness(results_table=None):
         vals = [row['FREQ'], 100 - row['FREQ']]
 
         ax[i].pie(vals, radius=1, colors=['#4CAF50', '#E0E0E0'], wedgeprops=dict(width=size, edgecolor='w'))
-        ax[i].text(0, 0, f"{row['FREQ']:.2f}%", ha='center', va='center', fontsize=14)
-        ax[i].set_title(row['Agent'], pad=20)
+        ax[i].text(0, 0, f"{row['FREQ']:.0f}%", ha='center', va='center', fontsize=14)
+        ax[i].set_title(row['Agent'], pad=0)
 
     # Hide unused subplots if any
     for j in range(grouped.shape[0], len(ax)):
         fig.delaxes(ax[j])
 
-    return fig.tight_layout(), grouped.round({'FREQ': 0})
+    return fig, grouped.round({'FREQ': 0})
 
 
 if __name__ == '__main__':
-    print_results(report_name='synthetics/GPTComplete', model_name='semantic')
+    print_results(report_name='../synthetics/Complete.character.llama3-70b', model_name='character')
 
